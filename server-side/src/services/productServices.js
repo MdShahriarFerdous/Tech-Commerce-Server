@@ -410,7 +410,7 @@ exports.filterProductService = async (req) => {
 		let matchConditions = {};
 		let priceMatchConditions = {};
 		let priceMin = 50,
-			priceMax = 1000000;
+			priceMax = 100000;
 
 		if (req.body.categoryId) {
 			matchConditions.categoryId = new ObjectId(req.body.categoryId);
