@@ -404,3 +404,87 @@ exports.CreateReviewService = async (req) => {
 		return error;
 	}
 };
+
+exports.filterProductService = async (req) => {
+	try {
+		let matchConditions = {};
+		let priceMatchConditions = {};
+		let priceMin = 50,
+			priceMax = 1000000;
+
+		if (req.body.categoryId) {
+			matchConditions.categoryId = new ObjectId(req.body.categoryId);
+		}
+		if (req.body.brandId) {
+			matchConditions.brandId = new ObjectId(req.body.brandId);
+		}
+		let matchStage = { $match: matchConditions };
+
+		let addFieldStage = {
+			$addFields: { numericPrice: { $toInt: "$price" } },
+		};
+
+		if (req.body.priceMin) {
+			priceMin = parseInt(req.body.priceMin);
+		}
+		if (req.body.priceMax) {
+			priceMax = parseInt(req.body.priceMax);
+		}
+
+		if (!isNaN(priceMin)) {
+			//that means if not string
+			priceMatchConditions.numericPrice = { $gte: priceMin };
+		}
+
+		if (!isNaN(priceMax)) {
+			//that means if not string
+			priceMatchConditions.numericPrice = { $lte: priceMax };
+		}
+
+		let priceMatchStage = { $match: priceMatchConditions };
+
+		let joinWithBrandIdStage = {
+			$lookup: {
+				from: "brands",
+				localField: "brandId",
+				foreignField: "_id",
+				as: "brand",
+			},
+		};
+		let unwindBrandStage = { $unwind: "$brand" };
+
+		let joinWithCategoryIdStage = {
+			$lookup: {
+				from: "categories",
+				localField: "categoryId",
+				foreignField: "_id",
+				as: "category",
+			},
+		};
+		let unwindCategoryStage = { $unwind: "$category" };
+
+		let projectionStage = {
+			$project: {
+				"brand._id": 0,
+				"category._id": 0,
+				brandId: 0,
+				categoryId: 0,
+			},
+		};
+
+		const filteredProduct = await Product.aggregate([
+			matchStage,
+			addFieldStage,
+			priceMatchStage,
+			joinWithBrandIdStage,
+			joinWithCategoryIdStage,
+			unwindBrandStage,
+			unwindCategoryStage,
+			projectionStage,
+		]);
+
+		return filteredProduct;
+	} catch (error) {
+		return error;
+	}
+};

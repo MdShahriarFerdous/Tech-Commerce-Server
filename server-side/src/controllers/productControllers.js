@@ -16,6 +16,7 @@ const {
 	ReviewListService,
 	CreateReviewService,
 	DetailShowService,
+	filterProductService,
 } = require("../services/productServices");
 const { successResponse } = require("../helpers/responseHelpers");
 const User = require("../models/userModel");
@@ -262,6 +263,22 @@ exports.productDetailsShow = async (req, res, next) => {
 			message: "Product detail return successfully",
 			payload: {
 				productDetails,
+			},
+		});
+	} catch (error) {
+		next(error);
+	}
+};
+
+exports.filteredProductList = async (req, res, next) => {
+	try {
+		const filteredProduct = await filterProductService(req);
+
+		return successResponse(res, {
+			statusCode: 200,
+			message: "Filtered Product return successfully",
+			payload: {
+				filteredProduct,
 			},
 		});
 	} catch (error) {

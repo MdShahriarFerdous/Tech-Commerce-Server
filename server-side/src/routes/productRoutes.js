@@ -11,6 +11,7 @@ const {
 	productDetailsShow,
 	productReviewList,
 	createProductReview,
+	filteredProductList,
 } = require("../controllers/productControllers");
 const { requireLogIn } = require("../middlewares/authMiddlewares");
 
@@ -27,5 +28,6 @@ router.get("/product-search-by-keyword/:keyword", productSearchByKeyword);
 router.get("/product-details/:productId", productDetailsShow);
 router.get("/product-review-list/:productId", productReviewList);
 router.post("/create-product-review", requireLogIn, createProductReview);
+router.post("/product-list-by-filter", filteredProductList);
 
 module.exports = router;
