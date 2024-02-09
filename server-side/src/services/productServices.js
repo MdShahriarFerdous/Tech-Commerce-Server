@@ -370,6 +370,7 @@ exports.ReviewListService = async (req, res) => {
 				des: 1,
 				rating: 1,
 				"userProfile.cus_name": 1,
+				createdAt: 1,
 			},
 		};
 
