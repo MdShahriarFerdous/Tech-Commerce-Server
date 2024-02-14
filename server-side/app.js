@@ -12,13 +12,12 @@ const rateLimit = require("express-rate-limit");
 const mongoSanitize = require("express-mongo-sanitize");
 const { errorResponse } = require("./src/helpers/responseHelpers");
 const cookieParser = require("cookie-parser");
-const { corsLocalPort } = require("./secrets");
 //{ origin: corsLocalPort, credentials: true }
 // Middlewares implement
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
-app.use(cors());
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(mongoSanitize());
 app.use(hpp());
 app.use(morgan("dev"));

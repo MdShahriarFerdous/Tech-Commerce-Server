@@ -111,7 +111,7 @@ exports.userContextData = async (req, res, next) => {
 
 		if (databaseUser.isBanned === true) {
 			return res.json({
-				status: "Banned",
+				error: "Banned",
 				message: "User is Banned!",
 			});
 		}

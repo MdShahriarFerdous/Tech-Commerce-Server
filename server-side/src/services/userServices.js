@@ -154,7 +154,7 @@ exports.VerifyUserService = async (req, res) => {
 		// Extract necessary information from the decoded object
 		const { username, email, password, OTPCode } = decoded;
 
-		if (OTPCode !== OTP) {
+		if (OTPCode !== Number(OTP)) {
 			return res.json({ error: "OTP does not match!" });
 		}
 
