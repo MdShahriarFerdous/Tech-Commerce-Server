@@ -40,10 +40,12 @@ exports.requireLogIn = async (req, res, next) => {
 				);
 
 				// Set access token cookie
-				const accessTokenCookie = `accessToken=${accessToken}; Path=/; Expires=${new Date(
-					Date.now() + 1000 * 60 * 10
-				).toUTCString()}; HttpOnly; Secure; SameSite=Lax`;
-				res.setHeader("Set-Cookie", accessTokenCookie);
+			//generate accessToken
+		const accessToken = createJsonWebToken(
+			{ _id: registeredUser._id },
+			jwtAccessTokenSecretKey,
+			jwtAccessTokenExpTime
+		);
 
 				req.user = decoded;
 				return next();
