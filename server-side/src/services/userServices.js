@@ -306,12 +306,10 @@ exports.UserLoginService = async (req, res) => {
 
 exports.UpdateProfileService = async (req) => {
 	try {
-		const updateUserProfile = await UserProfile.findOneAndUpdate(
-			{ userId: req.user._id },
-			req.body,
-			{ new: true }
-		).select("-userImage");
-		return updateUserProfile;
+		await UserProfile.findOneAndUpdate({ userId: req.user._id }, req.body, {
+			new: true,
+		}).select("-userImage");
+		return "Updated";
 	} catch (error) {
 		return error;
 	}
@@ -397,7 +395,7 @@ exports.ReadProfileService = async (req) => {
 
 		const fetchedUserProfile = await UserProfile.find(
 			{ userId: userId },
-			"-userImage"
+			"-userImage -_id -userId -createdAt -updatedAt"
 		).lean();
 
 		return fetchedUserProfile;
