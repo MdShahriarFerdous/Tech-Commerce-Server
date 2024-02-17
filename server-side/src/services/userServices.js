@@ -266,24 +266,38 @@ exports.UserLoginService = async (req, res) => {
 			jwtRefreshTokenExpTime
 		);
 
-		res.cookie("accessToken", accessToken, {
-			expires: new Date(Date.now() + 1000 * 60 * 10), //10 minutes
-			httpOnly: true,
-			path: "/",
-			secure: true,
-			sameSite: "Lax",
-		});
+
+		// res.cookie("accessToken", accessToken, {
+		// 	expires: new Date(Date.now() + 1000 * 60 * 10), //10 minutes
+		// 	httpOnly: true,
+		// 	path: "/",
+		// 	secure: true,
+		// 	sameSite: "Lax",
+		// });
+		const accessTokenCookie = `accessToken=${accessToken}; Path=/; Expires=${new Date(
+			Date.now() + 1000 * 60 * 10
+		).toUTCString()}; HttpOnly; Secure; SameSite=Lax`;
+		res.setHeader("Set-Cookie", accessTokenCookie);
+
+		// Set refresh token cookie
+		const refreshTokenCookie = `refreshToken=${refreshToken}; Path=/; Expires=${new Date(
+			Date.now() + 1000 * 60 * 60 * 12
+		).toUTCString()}; HttpOnly; Secure; SameSite=Lax`;
+		res.setHeader("Set-Cookie", refreshTokenCookie);
+
+		// res.cookie("refreshToken", refreshToken, {
+		// 	expires: new Date(Date.now() + 1000 * 60 * 60 * 12), //12 hr
+		// 	httpOnly: true,
+		// 	path: "/",
+		// 	secure: true,
+		// 	sameSite: "Lax",
+		// });
+
 		// Set access token cookie
 		// const accessTokenCookie = `accessToken=${accessToken}; Path=/; Expires=${new Date(Date.now() + 1000 * 60 * 10).toUTCString()}; HttpOnly; Secure; SameSite=Lax`;
 		// res.setHeader('Set-Cookie', accessTokenCookie);
 
-		res.cookie("refreshToken", refreshToken, {
-			expires: new Date(Date.now() + 1000 * 60 * 60 * 12), //12 hr
-			httpOnly: true,
-			path: "/",
-			secure: true,
-			sameSite: "Lax",
-		});
+
 
 			// Set refresh token cookie
 		// const refreshTokenCookie = `refreshToken=${refreshToken}; Path=/; Expires=${new Date(Date.now() + 1000 * 60 * 60 * 12).toUTCString()}; HttpOnly; Secure; SameSite=Lax`;
