@@ -274,7 +274,7 @@ exports.UserLoginService = async (req, res) => {
 		// 	sameSite: "Lax",
 		// });
 		// Set access token cookie
-		const accessTokenCookie = `accessToken=${accessToken}; Path=/; Domain=plainb-tech-commerce-pied.vercel.app; Expires=${new Date(Date.now() + 1000 * 60 * 10).toUTCString()}; HttpOnly; Secure; SameSite=Lax`;
+		const accessTokenCookie = `accessToken=${accessToken}; Path=/; Expires=${new Date(Date.now() + 1000 * 60 * 10).toUTCString()}; HttpOnly; Secure; SameSite=Lax`;
 		res.setHeader('Set-Cookie', accessTokenCookie);
 
 		// res.cookie("refreshToken", refreshToken, {
@@ -286,7 +286,7 @@ exports.UserLoginService = async (req, res) => {
 		// });
 
 			// Set refresh token cookie
-		const refreshTokenCookie = `refreshToken=${refreshToken}; Path=/; Domain=plainb-tech-commerce-pied.vercel.app; Expires=${new Date(Date.now() + 1000 * 60 * 60 * 12).toUTCString()}; HttpOnly; Secure; SameSite=Lax`;
+		const refreshTokenCookie = `refreshToken=${refreshToken}; Path=/; Expires=${new Date(Date.now() + 1000 * 60 * 60 * 12).toUTCString()}; HttpOnly; Secure; SameSite=Lax`;
 		res.setHeader('Set-Cookie', refreshTokenCookie);
 
 		const user = {
