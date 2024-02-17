@@ -40,12 +40,13 @@ exports.requireLogIn = async (req, res, next) => {
 				);
 
 				// Set access token cookie
-			//generate accessToken
-		const accessToken = createJsonWebToken(
-			{ _id: registeredUser._id },
-			jwtAccessTokenSecretKey,
-			jwtAccessTokenExpTime
-		);
+				res.cookie("accessToken", accessToken, {
+				expires: new Date(Date.now() + 1000 * 60 * 10), //10 minutes
+				httpOnly: true,
+				path: "/",
+				secure: true,
+				sameSite: "Lax",
+				});
 
 				req.user = decoded;
 				return next();
@@ -139,10 +140,13 @@ exports.isProtected = async (req, res, next) => {
 				);
 
 				// Set access token cookie
-				const accessTokenCookie = `accessToken=${accessToken}; Path=/; Expires=${new Date(
-					Date.now() + 1000 * 60 * 10
-				).toUTCString()}; HttpOnly; Secure; SameSite=Lax`;
-				res.setHeader("Set-Cookie", accessTokenCookie);
+				res.cookie("accessToken", accessToken, {
+				expires: new Date(Date.now() + 1000 * 60 * 10), //10 minutes
+				httpOnly: true,
+				path: "/",
+				secure: true,
+				sameSite: "Lax",
+				});
 
 				req.user = decoded;
 				return next();
