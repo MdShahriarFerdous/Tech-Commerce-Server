@@ -270,7 +270,7 @@ exports.UserLoginService = async (req, res) => {
 			expires: new Date(Date.now() + 1000 * 60 * 10), //10 minutes
 			httpOnly: true,
 			path: "/",
-			domain: "https://plainb-tech-commerce-pied.vercel.app",
+			domain: "plainb-tech-commerce-pied.vercel.app",
 			secure: true,
 			sameSite: "Strict",
 		});
@@ -279,7 +279,7 @@ exports.UserLoginService = async (req, res) => {
 			expires: new Date(Date.now() + 1000 * 60 * 60 * 12), //12 hr
 			httpOnly: true,
 			path: "/",
-			domain: "https://plainb-tech-commerce-pied.vercel.app",
+			domain: "plainb-tech-commerce-pied.vercel.app",
 			secure: true,
 			sameSite: "Strict",
 		});
