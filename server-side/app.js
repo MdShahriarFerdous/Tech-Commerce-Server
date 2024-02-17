@@ -12,7 +12,7 @@ const rateLimit = require("express-rate-limit");
 const mongoSanitize = require("express-mongo-sanitize");
 const { errorResponse } = require("./src/helpers/responseHelpers");
 const cookieParser = require("cookie-parser");
-const origins = ['http://localhost:5173', 'https://plainb-tech-commerce.vercel.app', 'https://tech-commerce-client-aylo8j81h-mdshahriarferdous-projects.vercel.app'];
+const origins = ['http://localhost:5173', 'https://plainb-tech-commerce-pied.vercel.app'];
 
 // Middlewares implement
 app.use(express.json());
