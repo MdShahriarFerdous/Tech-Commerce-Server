@@ -111,7 +111,7 @@ exports.userContextData = async (req, res, next) => {
 
 		if (databaseUser.isBanned === true) {
 			return res.json({
-				status: "Banned",
+				error: "Banned",
 				message: "User is Banned!",
 			});
 		}
@@ -179,13 +179,13 @@ exports.createUserProfile = async (req, res, next) => {
 
 exports.updateProfile = async (req, res, next) => {
 	try {
-		const updatedProfile = await UpdateProfileService(req);
+		const updatedMessage = await UpdateProfileService(req);
 
 		return successResponse(res, {
 			statusCode: 200,
 			message: "Profile Updated",
 			payload: {
-				updatedProfile,
+				updatedMessage,
 			},
 		});
 	} catch (error) {
