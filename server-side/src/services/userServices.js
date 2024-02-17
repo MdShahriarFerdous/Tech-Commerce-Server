@@ -270,18 +270,16 @@ exports.UserLoginService = async (req, res) => {
 			expires: new Date(Date.now() + 1000 * 60 * 10), //10 minutes
 			httpOnly: true,
 			path: "/",
-			domain: "plainb-tech-commerce-pied.vercel.app",
 			secure: true,
-			sameSite: "Strict",
+			sameSite: "Lax",
 		});
 
 		res.cookie("refreshToken", refreshToken, {
 			expires: new Date(Date.now() + 1000 * 60 * 60 * 12), //12 hr
 			httpOnly: true,
 			path: "/",
-			domain: "plainb-tech-commerce-pied.vercel.app",
 			secure: true,
-			sameSite: "Strict",
+			sameSite: "Lax",
 		});
 
 		const user = {
