@@ -272,7 +272,7 @@ exports.UserLoginService = async (req, res) => {
 		// 	path: "/",
 		// 	secure: true,
 		// 	sameSite: "Lax",
-		});
+		// });
 		// Set access token cookie
 		const accessTokenCookie = `accessToken=${accessToken}; Path=/; Domain=plainb-tech-commerce-pied.vercel.app; Expires=${new Date(Date.now() + 1000 * 60 * 10).toUTCString()}; HttpOnly; Secure; SameSite=Lax`;
 		res.setHeader('Set-Cookie', accessTokenCookie);
