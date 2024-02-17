@@ -266,6 +266,7 @@ exports.UserLoginService = async (req, res) => {
 			jwtRefreshTokenExpTime
 		);
 
+
 		// res.cookie("accessToken", accessToken, {
 		// 	expires: new Date(Date.now() + 1000 * 60 * 10), //10 minutes
 		// 	httpOnly: true,
@@ -291,6 +292,16 @@ exports.UserLoginService = async (req, res) => {
 		// 	secure: true,
 		// 	sameSite: "Lax",
 		// });
+
+		// Set access token cookie
+		// const accessTokenCookie = `accessToken=${accessToken}; Path=/; Expires=${new Date(Date.now() + 1000 * 60 * 10).toUTCString()}; HttpOnly; Secure; SameSite=Lax`;
+		// res.setHeader('Set-Cookie', accessTokenCookie);
+
+
+
+			// Set refresh token cookie
+		// const refreshTokenCookie = `refreshToken=${refreshToken}; Path=/; Expires=${new Date(Date.now() + 1000 * 60 * 60 * 12).toUTCString()}; HttpOnly; Secure; SameSite=Lax`;
+		// res.setHeader('Set-Cookie', refreshTokenCookie);
 
 		const user = {
 			username: databaseUser.username,
