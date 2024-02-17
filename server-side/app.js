@@ -18,7 +18,7 @@ const origins = ['http://localhost:5173', 'https://plainb-tech-commerce-pied.ver
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
-app.use(cors({ origin: origins, credentials: true }));
+app.use(cors({ origin: 'https://plainb-tech-commerce-pied.vercel.app', credentials: true }));
 app.use(mongoSanitize());
 app.use(hpp());
 app.use(morgan("dev"));
