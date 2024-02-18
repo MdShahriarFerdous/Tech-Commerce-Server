@@ -25,6 +25,7 @@ app.use(
 			"https://plainb-tech-commerce-pied.vercel.app",
 			"https://dazzling-lamington-727005.netlify.app",
 		],
+		methods: "GET,PUT,POST,DELETE",
 		credentials: true,
 	})
 );
