@@ -12,7 +12,7 @@ const rateLimit = require("express-rate-limit");
 const mongoSanitize = require("express-mongo-sanitize");
 const { errorResponse } = require("./src/helpers/responseHelpers");
 const cookieParser = require("cookie-parser");
-const origins = ['http://localhost:5173', 'https://plainb-tech-commerce-pied.vercel.app', "https://plainb-tech-commerce.netlify.app"];
+const origins = ['http://localhost:5173', 'https://plainb-tech-commerce-pied.vercel.app'];
 
 // Middlewares implement
 app.use(express.json());
