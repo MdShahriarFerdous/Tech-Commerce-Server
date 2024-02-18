@@ -39,12 +39,13 @@ exports.requireLogIn = async (req, res, next) => {
 					jwtAccessTokenExpTime
 				);
 
+				// Set access token cookie
 				res.cookie("accessToken", accessToken, {
-					expires: new Date(Date.now() + 1000 * 60 * 15), //15 minutes
-					httpOnly: true,
-					path: "/",
-					secure: true,
-					sameSite: "Strict",
+				expires: new Date(Date.now() + 1000 * 60 * 10), //10 minutes
+				httpOnly: true,
+				path: "/",
+				secure: true,
+				sameSite: "Lax",
 				});
 
 				req.user = decoded;
@@ -138,13 +139,15 @@ exports.isProtected = async (req, res, next) => {
 					jwtAccessTokenExpTime
 				);
 
+				// Set access token cookie
 				res.cookie("accessToken", accessToken, {
-					expires: new Date(Date.now() + 1000 * 60 * 15), //15 minutes
-					httpOnly: true,
-					path: "/",
-					secure: true,
-					sameSite: "Strict",
+				expires: new Date(Date.now() + 1000 * 60 * 10), //10 minutes
+				httpOnly: true,
+				path: "/",
+				secure: true,
+				sameSite: "Lax",
 				});
+
 				req.user = decoded;
 				return next();
 			}

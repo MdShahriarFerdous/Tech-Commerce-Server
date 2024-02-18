@@ -154,7 +154,7 @@ exports.VerifyUserService = async (req, res) => {
 		// Extract necessary information from the decoded object
 		const { username, email, password, OTPCode } = decoded;
 
-		if (OTPCode !== OTP) {
+		if (OTPCode !== Number(OTP)) {
 			return res.json({ error: "OTP does not match!" });
 		}
 
@@ -266,21 +266,35 @@ exports.UserLoginService = async (req, res) => {
 			jwtRefreshTokenExpTime
 		);
 
+
 		res.cookie("accessToken", accessToken, {
 			expires: new Date(Date.now() + 1000 * 60 * 10), //10 minutes
 			httpOnly: true,
 			path: "/",
 			secure: true,
-			sameSite: "Strict",
+			sameSite: "Lax",
 		});
+
+		// Set access token cookie
+		// const accessTokenCookie = `accessToken=${accessToken}; Path=/; Expires=${new Date(
+		// 	Date.now() + 1000 * 60 * 10
+		// ).toUTCString()}; HttpOnly; Secure; SameSite=Lax`;
+		// res.setHeader("Set-Cookie", accessTokenCookie);
+
+		// Set refresh token cookie
+		// const refreshTokenCookie = `refreshToken=${refreshToken}; Path=/; Expires=${new Date(
+		// 	Date.now() + 1000 * 60 * 60 * 12
+		// ).toUTCString()}; HttpOnly; Secure; SameSite=Lax`;
+		// res.setHeader("Set-Cookie", refreshTokenCookie);
 
 		res.cookie("refreshToken", refreshToken, {
 			expires: new Date(Date.now() + 1000 * 60 * 60 * 12), //12 hr
 			httpOnly: true,
 			path: "/",
 			secure: true,
-			sameSite: "Strict",
+			sameSite: "Lax",
 		});
+
 
 		const user = {
 			username: databaseUser.username,
@@ -306,12 +320,10 @@ exports.UserLoginService = async (req, res) => {
 
 exports.UpdateProfileService = async (req) => {
 	try {
-		const updateUserProfile = await UserProfile.findOneAndUpdate(
-			{ userId: req.user._id },
-			req.body,
-			{ new: true }
-		).select("-userImage");
-		return updateUserProfile;
+		await UserProfile.findOneAndUpdate({ userId: req.user._id }, req.body, {
+			new: true,
+		}).select("-userImage");
+		return "Updated";
 	} catch (error) {
 		return error;
 	}
@@ -397,7 +409,7 @@ exports.ReadProfileService = async (req) => {
 
 		const fetchedUserProfile = await UserProfile.find(
 			{ userId: userId },
-			"-userImage"
+			"-userImage -_id -userId -createdAt -updatedAt"
 		).lean();
 
 		return fetchedUserProfile;
