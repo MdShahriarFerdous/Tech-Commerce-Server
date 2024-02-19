@@ -86,7 +86,9 @@ exports.createBrand = async (req, res, next) => {
 //client--> data.payload.brandLists = []
 exports.productBrandList = async (req, res, next) => {
 	try {
+		console.log("in the controller")
 		const brandLists = await BrandListService();
+		console.log(brandLists)
 
 		return successResponse(res, {
 			statusCode: 200,
