@@ -53,7 +53,7 @@ app.get("/", (req, res) => {
 
 //for multiple files in routes folder
 readdirSync(Path.join(__dirname, "./src/routes")).map((router) => {
-	app.use("/api/v1",  require(Path.join(__dirname, ./src/routes/${router}));
+	app.use("/api/v1",  require(Path.join(__dirname, `./src/routes/${router}`));
 });
 //client error
 app.use((req, res, next) => {
