@@ -69,9 +69,13 @@ app.use((err, req, res, next) => {
 	});
 });
 
-app.listen(ServerPort || 8000, () => {
+( async ()=>{
+	await databaseConnection();
+})()
+
+app.listen(ServerPort || 8000, async() => {
 	console.log(`Server is running at: http://localhost:${ServerPort}`);
-	databaseConnection();
+	
 });
 
 module.exports = app;
