@@ -2,6 +2,7 @@ const { readdirSync } = require("fs");
 const createError = require("http-errors");
 const express = require("express");
 const { ServerPort } = require("./secrets");
+const Path = require('path')
 const databaseConnection = require("./src/config/db");
 const app = express();
 
@@ -51,7 +52,7 @@ app.get("/", (req, res) => {
 });
 
 //for multiple files in routes folder
-readdirSync("./src/routes").map((router) => {
+readdirSync(Path.join(__dirname, "./src/routes").map((router) => {
 	app.use("/api/v1", require(`./src/routes/${router}`));
 });
 
