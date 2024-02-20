@@ -24,8 +24,7 @@ app.use(
 	cors({
 		origin: [
 			"http://localhost:5173",
-			"https://plainb-tech-commerce-pied.vercel.app",
-			"https://dazzling-lamington-727005.netlify.app",
+			"https://tech-commerce-client-aylo8j81h-mdshahriarferdous-projects.vercel.app"
 		],
 		methods: "GET,PUT,POST,DELETE",
 		credentials: true,
