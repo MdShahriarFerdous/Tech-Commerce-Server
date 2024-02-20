@@ -24,7 +24,7 @@ app.use(
 	cors({
 		origin: [
 			"http://localhost:5173",
-			"https://tech-commerce-client-aylo8j81h-mdshahriarferdous-projects.vercel.app"
+			"https://plainb-tech-commerce.vercel.app"
 		],
 		methods: "GET,PUT,POST,DELETE",
 		credentials: true,
