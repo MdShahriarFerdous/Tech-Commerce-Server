@@ -72,9 +72,6 @@ app.use((err, req, res, next) => {
 	await databaseConnection();
 })()
 
-( async ()=>{
-	await databaseConnection();
-})()
 
 app.listen(ServerPort || 8000, async() => {
 	console.log(`Server is running at: http://localhost:${ServerPort}`);
