@@ -2,7 +2,7 @@ const { readdirSync } = require("fs");
 const createError = require("http-errors");
 const express = require("express");
 const { ServerPort } = require("./secrets");
-const Path = require('path')
+const Path = require("path");
 const databaseConnection = require("./src/config/db");
 const app = express();
 
@@ -24,7 +24,7 @@ app.use(
 	cors({
 		origin: [
 			"http://localhost:5173",
-			"https://plainb-tech-commerce.vercel.app"
+			"https://plainb-tech-commerce.vercel.app",
 		],
 		methods: "GET,PUT,POST,DELETE",
 		credentials: true,
@@ -53,7 +53,6 @@ app.get("/", (req, res) => {
 //for multiple files in routes folder
 readdirSync(Path.join(__dirname, "./src/routes")).map((router) => {
 	app.use("/api/v1", require(Path.join(__dirname, `./src/routes/${router}`)));
-
 });
 //client error
 app.use((req, res, next) => {
@@ -67,14 +66,13 @@ app.use((err, req, res, next) => {
 		message: err.message,
 	});
 });
-(async()=>{
+
+(async () => {
 	await databaseConnection();
-})()
+})();
 
-
-app.listen(ServerPort || 8000, async() => {
+app.listen(ServerPort || 8000, async () => {
 	console.log(`Server is running at: http://localhost:${ServerPort}`);
-	
 });
 
 module.exports = app;

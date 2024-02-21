@@ -8,9 +8,7 @@ const { ObjectId } = mongoose.Types;
 
 exports.BrandListService = async (req, res) => {
 	try {
-		console.log("in the service")
 		const brandLists = await Brand.find().lean();
-		console.log("received brands")
 		return brandLists;
 	} catch (error) {
 		return error;
