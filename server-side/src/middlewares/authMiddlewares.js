@@ -40,13 +40,10 @@ exports.requireLogIn = async (req, res, next) => {
 				);
 
 				// Set access token cookie
-				res.cookie("accessToken", accessToken, {
-					expires: new Date(Date.now() + 1000 * 60 * 10), //10 minutes
-					httpOnly: true,
-					path: "/",
-					secure: true,
-					sameSite: "Lax",
-				});
+				const accessTokenCookie = `accessToken=${accessToken}; Path=/; Expires=${new Date(
+					Date.now() + 1000 * 60 * 15
+				).toUTCString()}; HttpOnly; Secure; SameSite=Lax`;
+				res.setHeader("Set-Cookie", accessTokenCookie);
 
 				req.user = decoded;
 				return next();
@@ -140,13 +137,10 @@ exports.isProtected = async (req, res, next) => {
 				);
 
 				// Set access token cookie
-				res.cookie("accessToken", accessToken, {
-					expires: new Date(Date.now() + 1000 * 60 * 10), //10 minutes
-					httpOnly: true,
-					path: "/",
-					secure: true,
-					sameSite: "Lax",
-				});
+				const accessTokenCookie = `accessToken=${accessToken}; Path=/; Expires=${new Date(
+					Date.now() + 1000 * 60 * 15
+				).toUTCString()}; HttpOnly; Secure; SameSite=Lax`;
+				res.setHeader("Set-Cookie", accessTokenCookie);
 
 				req.user = decoded;
 				return next();
