@@ -229,7 +229,7 @@ exports.VerifyUserService = async (req, res) => {
 		};
 		const userProfileImage = userProfile.userImage;
 
-		return { user, userProfileImage };
+		return { user, userProfileImage, refreshToken };
 	} catch (error) {
 		return error;
 	}
@@ -322,7 +322,7 @@ exports.UserLoginService = async (req, res) => {
 		);
 		const userProfileImage = userProfile.userImage;
 
-		return { user, userProfileImage };
+		return { user, userProfileImage, refreshToken };
 	} catch (error) {
 		return error;
 	}
