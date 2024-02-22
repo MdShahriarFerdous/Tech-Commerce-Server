@@ -27,7 +27,7 @@ app.use(
 			"https://plainb-tech-commerce.vercel.app",
 		],
 		methods: "GET,PUT,POST,DELETE",
-		credentials: true,
+		// credentials: true,
 	})
 );
 app.use(mongoSanitize());
