@@ -265,11 +265,11 @@ exports.UserLoginService = async (req, res) => {
 		}
 
 		//generate accessToken
-		const accessToken = createJsonWebToken(
-			{ _id: databaseUser._id },
-			jwtAccessTokenSecretKey,
-			jwtAccessTokenExpTime
-		);
+		// const accessToken = createJsonWebToken(
+		// 	{ _id: databaseUser._id },
+		// 	jwtAccessTokenSecretKey,
+		// 	jwtAccessTokenExpTime
+		// );
 
 		//generate refreshToken
 		const refreshToken = createJsonWebToken(
@@ -287,16 +287,16 @@ exports.UserLoginService = async (req, res) => {
 		// });
 
 		// Set access token cookie
-		const accessTokenCookie = `accessToken=${accessToken}; Path=/; Expires=${new Date(
-			Date.now() + 1000 * 60 * 15
-		).toUTCString()}; HttpOnly; Secure; SameSite=Lax`;
-		res.setHeader("Set-Cookie", accessTokenCookie);
+		// const accessTokenCookie = `accessToken=${accessToken}; Path=/; Expires=${new Date(
+		// 	Date.now() + 1000 * 60 * 15
+		// ).toUTCString()}; HttpOnly; Secure; SameSite=Lax`;
+		// res.setHeader("Set-Cookie", accessTokenCookie);
 
 		// Set refresh token cookie
-		const refreshTokenCookie = `refreshToken=${refreshToken}; Path=/; Expires=${new Date(
-			Date.now() + 1000 * 60 * 60 * 12
-		).toUTCString()}; HttpOnly; Secure; SameSite=Lax`;
-		res.setHeader("Set-Cookie", refreshTokenCookie);
+		// const refreshTokenCookie = `refreshToken=${refreshToken}; Path=/; Expires=${new Date(
+		// 	Date.now() + 1000 * 60 * 60 * 12
+		// ).toUTCString()}; HttpOnly; Secure; SameSite=Lax`;
+		// res.setHeader("Set-Cookie", refreshTokenCookie);
 
 		// res.cookie("refreshToken", refreshToken, {
 		// 	expires: new Date(Date.now() + 1000 * 60 * 60 * 12), //12 hr
@@ -321,7 +321,6 @@ exports.UserLoginService = async (req, res) => {
 			"userImage"
 		);
 		const userProfileImage = userProfile.userImage;
-
 		return { user, userProfileImage, refreshToken };
 	} catch (error) {
 		return error;

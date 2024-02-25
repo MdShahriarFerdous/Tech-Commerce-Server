@@ -79,9 +79,9 @@ exports.userLogin = async (req, res, next) => {
 			statusCode: 200,
 			message: "User Loggedin Successfully!",
 			payload: {
-				user: data.user,
-				userImage: data.userProfileImage,
-				token: data.refreshToken,
+				user: data?.user,
+				userImage: data?.userProfileImage,
+				token: data?.refreshToken,
 			},
 		});
 	} catch (error) {
